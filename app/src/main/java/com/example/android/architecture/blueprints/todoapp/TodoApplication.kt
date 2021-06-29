@@ -29,7 +29,8 @@ import timber.log.Timber.DebugTree
  */
 class TodoApplication : Application() {
 
-    val tasksRepository: TasksRepository = ServiceLocator.provideTasksRepository(this)
+    val tasksRepository: TasksRepository
+        get() = ServiceLocator.provideTasksRepository(this)
 
     override fun onCreate() {
         super.onCreate()

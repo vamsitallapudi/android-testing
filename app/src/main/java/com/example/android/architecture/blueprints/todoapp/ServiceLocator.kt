@@ -14,7 +14,7 @@ import kotlinx.coroutines.runBlocking
 object ServiceLocator {
     private var database : ToDoDatabase ? = null
     @Volatile
-    private var tasksRepository : TasksRepository? = null
+    var tasksRepository : TasksRepository? = null
         @VisibleForTesting set
 
     fun provideTasksRepository(context : Context) : TasksRepository {

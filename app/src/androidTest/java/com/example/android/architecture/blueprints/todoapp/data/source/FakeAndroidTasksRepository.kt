@@ -84,7 +84,8 @@ class FakeAndroidTasksRepository : TasksRepository {
     }
 
     override suspend fun saveTask(task: Task) {
-        TODO("Not yet implemented")
+        tasksMap[task.id] = task
+        refreshTasks()
     }
 
 
