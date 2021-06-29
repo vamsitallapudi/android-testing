@@ -13,7 +13,7 @@ import java.lang.Exception
 import kotlin.reflect.KClass
 
 class FakeAndroidTasksRepository : TasksRepository {
-    var tasksMap: LinkedHashMap<String, Task> = LinkedHashMap()
+    private var tasksMap: LinkedHashMap<String, Task> = LinkedHashMap()
     private var shouldReturnError = false
     private val observableTasks = MutableLiveData<Result<List<Task>>>()
     override suspend fun getTasks(forceUpdate: Boolean): Result<List<Task>> {
@@ -23,7 +23,7 @@ class FakeAndroidTasksRepository : TasksRepository {
     }
 
     override suspend fun refreshTasks() {
-        observableTasks.value = getTasks()
+        observableTasks.postValue(getTasks())
     }
 
     fun setReturnError(value: Boolean) {
@@ -90,7 +90,7 @@ class FakeAndroidTasksRepository : TasksRepository {
 
 
     override suspend fun completeTask(taskId: String) {
-        TODO("Not yet implemented")
+        tasksMap[taskId]?.isCompleted = true
     }
 
     override suspend fun activateTask(task: Task) {
